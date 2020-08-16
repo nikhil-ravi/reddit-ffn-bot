@@ -38,9 +38,10 @@ class SIYEMetadata(Metaparser):
             stats = stats + "Status: In Progress"
         stats = stats.split("\n")
         stats = [x for x in stats if x.strip()]
+        stats_not_to_print = ["Summary", "Disclaimer", "Author's Note"]
         for l in stats:
             individual_stat = tuple(p.strip() for p in l.split(":", 2))
-            if individual_stat[0]!="Summary": # Don't return the summary
+            if individual_stat[0] not in stats_not_to_print: # Don't return the summary
                 if individual_stat[0]=="Reviews":
                     if individual_stat[1]: # If the reviews stat is not present, don't return it
                         yield individual_stat
